@@ -14,6 +14,8 @@ A model-native persistent memory adapter built from:
 
 This project explores a compact memory architecture where an LLM defines its own semantic memory buckets, while a deterministic runtime stores and updates those buckets through governed reducer actions.
 
+The examples in this repository use the surrounding Chatty ecosystem because the pattern was developed to solve real continuity and context-routing problems across many related local-first AI projects.
+
 
 
 The goal is not “infinite memory.”
