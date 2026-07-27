@@ -268,6 +268,39 @@ Packets and buckets are the working desk.
 
 ## Architecture
 
+```mermaid
+flowchart TB
+    model["Target model<br/>defines semantic drawers"] --> bucketMap["Frozen bucket map<br/>model-specific memory slots + UNASSIGNED"]
+    bucketMap --> runtime["Deterministic runtime<br/>owns persistence"]
+    runtime --> standing["Standing bucket memory<br/>compact always-on orientation"]
+    runtime --> triggers["Trigger registry<br/>entities, projects, aliases"]
+    triggers --> hot["Hot context cards<br/>inject only when relevant"]
+    triggers --> packets["Context routing packets<br/>role, status, adjacency, where next"]
+
+    user["User input"] --> validator["Trigger validator"]
+    validator --> hot
+    validator --> packets
+    standing --> prompt["Prompt build<br/>standing memory + matched packets"]
+    hot --> prompt
+    packets --> prompt
+    prompt --> response["LLM response"]
+    response --> proposals["Proposed memory actions<br/>remember, mark stale, add adjacency"]
+    proposals --> reducers{"Reducers validate<br/>runtime decides"}
+    reducers -->|approved| state["Memory state persists<br/>bucket values update"]
+    reducers -->|rejected| rejected["Rejection event<br/>no hidden mutation"]
+    state --> eventLog["JSONL event log<br/>audit trail"]
+    rejected --> eventLog
+    eventLog --> cold["Cold logs<br/>archive and migration source"]
+
+    classDef modelLayer fill:#eef7f2,stroke:#25624f,color:#14231d;
+    classDef runtimeLayer fill:#fff8ec,stroke:#9b5b2e,color:#2a1b10;
+    classDef auditLayer fill:#f3f0ea,stroke:#777,color:#333;
+
+    class model,bucketMap,user,response,proposals modelLayer;
+    class runtime,standing,triggers,hot,packets,validator,prompt,reducers,state runtimeLayer;
+    class rejected,eventLog,cold auditLayer;
+```
+
 ```text
 User input
   ->
