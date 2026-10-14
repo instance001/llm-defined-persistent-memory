@@ -32,3 +32,7 @@ GitHub API licence field at inventory time: `AGPL-3.0`. This is a metadata obser
 ## Evidence and limitations
 
 Evidence: authenticated GitHub API metadata captured by the FMI provenance audit. Contribution, prior art, ownership, contributors, document licensing, relationships, releases, and publication status require human verification.
+
+## Evidence-led lineage position
+
+The README expressly identifies Semantic Signal Alphabet and Chatty Quest/RD Engine as inputs. The documented contribution is an `EXPERIMENTAL` adapter pattern: a model-specific bucket map combined with deterministic, reducer-governed storage and updates for bounded continuity. This is not a claim to own persistent memory, vector retrieval, summarisation, model introspection, or any general memory architecture.
